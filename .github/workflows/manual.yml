@@ -9,13 +9,13 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows11 - latest
 
     steps:
       - uses: actions/checkout@v3
 
       - name: List contents
-        run: ls
+        run: dir
 
       - name: compile classes
         working-directory: ./src
@@ -23,28 +23,28 @@ jobs:
 
       - name: List contents of src directory after compile
         working-directory: ./src/login
-        run: ls
+        run: dir
 
       - name: copy compiled classes to testresources directory
         working-directory: ./src/login
-        run: cp Task.class Login.class LoginDetail.class TO_DO_LIST.class ../../test/Login/
+        run: copy Task.class Login.class LoginDetail.class TO_DO_LIST.class ../../test/Login/
 
       - name: copy compiled Test classes to testresources directory
         working-directory: ./test/login
-        run: cp LoginTest.class LoginDetailTest.class TaskTest.class TO_DO_LISTTest.class ../../testresources/
+        run: copy LoginTest.class LoginDetailTest.class TaskTest.class TO_DO_LISTTest.class ../../testresources/
 
       - name: List contents test package
         working-directory: ./test/login
-        run: ls
+        run: dir
 
       - name: run TO_DO_LIST Class tests and create report
         working-directory: ./test
         run: |
-         ls
+         dir
          java -jar "../testresoureces/junit-platform-console-standalone-1.6.0.jar" -cp "." --select-class login.TO_DO_LISTTest
 
       - name: run LoginDetail Class tests and create report
         working-directory: ./test
         run: |
-         ls
+         dir
          java -jar "../testresoureces/junit-platform-console-standalone-1.6.0.jar" -cp "." --select-class login.LoginDetailTest
